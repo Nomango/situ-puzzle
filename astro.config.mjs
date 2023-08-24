@@ -10,7 +10,7 @@ export default defineConfig({
   adapter: vercel(),
   integrations: [
     UnoCSS({
-      injectReset: true, // or a path to the reset file
+      // injectReset: true, // or a path to the reset file
     }),
     react(),
   ],

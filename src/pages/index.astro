@@ -1,28 +1,12 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Card from "../components/Card.astro";
+import ChatBox from "../components/ChatBox.jsx";
 ---
 
-<Layout title="Welcome to Astro.">
-  <main>
-    <h1>Welcome to <span class="text-gradient">Astro</span></h1>
-    <p class="instructions">
-      To get started, open the directory <code>src/pages</code> in your project.<br
-      />
-      <strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message
-      above.
-    </p>
+<Layout title="Situation Puzzle">
+  <main class="flex flex-col items-center justify-center m-auto w-full h-full">
+    <div class="position-absolute w-full h-full md:w-[600px] md:max-w-[calc(100%-2rem)] md:h-80%">
+      <ChatBox client:only="react" />
+    </div>
   </main>
 </Layout>
-
-<style>
-  main {
-    margin: auto;
-    padding: 1rem;
-    width: 800px;
-    max-width: calc(100% - 2rem);
-    color: white;
-    font-size: 20px;
-    line-height: 1.6;
-  }
-</style>

@@ -16,10 +16,13 @@
     "@heroicons/react": "^2.0.18",
     "@mantine/core": "^6.0.19",
     "@mantine/hooks": "^6.0.19",
+    "@types/qs": "^6.9.7",
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
     "astro": "^2.10.13",
+    "qs": "^6.11.2",
     "react": "^18.0.0",
+    "react-cookie": "^6.1.0",
     "react-dom": "^18.0.0"
   },
   "devDependencies": {
