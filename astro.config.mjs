@@ -2,6 +2,7 @@
 import { defineConfig } from "astro/config";
 import UnoCSS from "unocss/astro";
 import vercel from "@astrojs/vercel/edge";
+import react from "@astrojs/react";
 
 // https://astro.build/config
 export default defineConfig({
@@ -11,5 +12,6 @@ export default defineConfig({
     UnoCSS({
       injectReset: true, // or a path to the reset file
     }),
+    react(),
   ],
 });

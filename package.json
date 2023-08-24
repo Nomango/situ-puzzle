@@ -10,11 +10,20 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/react": "^2.3.2",
     "@astrojs/vercel": "^3.8.2",
+    "@emotion/react": "^11.11.1",
     "@heroicons/react": "^2.0.18",
-    "astro": "^2.10.13"
+    "@mantine/core": "^6.0.19",
+    "@mantine/hooks": "^6.0.19",
+    "@types/react": "^18.0.21",
+    "@types/react-dom": "^18.0.6",
+    "astro": "^2.10.13",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
   },
   "devDependencies": {
+    "@unocss/astro": "^0.55.2",
     "@unocss/reset": "^0.55.2",
     "unocss": "^0.55.2"
   }
