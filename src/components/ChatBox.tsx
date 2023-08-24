@@ -75,7 +75,7 @@ export default function ChatBox() {
 
   const [cookies, setCookie] = useCookies(["cid"]);
   useEffect(() => {
-    cookies.cid = cookies.cid || "a5d81020-dbb9-43e1-8dfb-75bf1abc4969";
+    // cookies.cid = cookies.cid || "a5d81020-dbb9-43e1-8dfb-75bf1abc4969";
     if (cookies.cid) {
       doAction(async () => {
         await reloadDialogs(cookies.cid);
