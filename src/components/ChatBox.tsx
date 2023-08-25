@@ -73,6 +73,10 @@ export default function ChatBox() {
     });
   }, [reloadDialogs]);
 
+  const stopGame = useCallback(async () => {
+    setChatId("");
+  }, []);
+
   const [cookies, setCookie] = useCookies(["cid"]);
   useEffect(() => {
     // cookies.cid = cookies.cid || "a5d81020-dbb9-43e1-8dfb-75bf1abc4969";
@@ -105,8 +109,25 @@ export default function ChatBox() {
     <>
       <div className="flex flex-col p4 w-full h-full bg-[rgb(247,250,255)] md:rounded-lg md:drop-shadow-lg">
         <Card className="h-20% overflow-auto" withBorder p="xl" radius="md">
-          <Text fz="xl">汤面 {puzzle && `《${puzzle.title}》`}</Text>
-          <Text fz="md">{puzzle?.mystery}</Text>
+          {puzzle ? (
+            <>
+              <Text fz="xl" align="center">
+                汤面 《{puzzle.title}》
+              </Text>
+              <Text fz="md" color="gray">
+                {puzzle?.mystery}
+              </Text>
+            </>
+          ) : (
+            <>
+              <Text fz="xl" align="center">
+                海龟汤 with AI
+              </Text>
+              <Text fz="md" color="gray">
+                阅读一个难以理解的事件，试着提出任何问题，并找出事件背后真正的原因吧！
+              </Text>
+            </>
+          )}
         </Card>
         <div className="h-70% flex-1">
           <Chat dialogs={dialogs}></Chat>
@@ -153,10 +174,10 @@ export default function ChatBox() {
                   查看汤底
                 </Menu.Item>
                 <Menu.Item
-                  onClick={startNewGame}
+                  onClick={stopGame}
                   icon={<ArrowPathIcon className="w-4" />}
                 >
-                  重新开始
+                  结束游戏
                 </Menu.Item>
               </Menu.Dropdown>
             </Menu>
@@ -182,7 +203,7 @@ export default function ChatBox() {
             ) : (
               <Loader size={18} />
             )}
-            &nbsp; 开始新游戏
+            &nbsp; 随机上汤
           </Button>
         )}
       </div>
