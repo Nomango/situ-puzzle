@@ -199,11 +199,16 @@ export default function ChatBox() {
             disabled={pending}
           >
             {!pending ? (
-              <ArrowPathIcon className="w-4" />
+              <>
+                <ArrowPathIcon className="w-4" />
+                &nbsp; 随机上汤
+              </>
             ) : (
-              <Loader size={18} />
+              <>
+                <Loader size={18} />
+                &nbsp; 正在上汤
+              </>
             )}
-            &nbsp; 随机上汤
           </Button>
         )}
       </div>
