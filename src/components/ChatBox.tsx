@@ -49,9 +49,11 @@ export default function ChatBox() {
 
   const reloadDialogs = useCallback(async (cid: string) => {
     const history = await fetchChatHistory(cid);
-    setPuzzle(history.puzzle);
-    setDialogs(history.discussion || []);
-    setChatId(cid);
+    if (history.puzzle) {
+      setPuzzle(history.puzzle);
+      setDialogs(history.discussion || []);
+      setChatId(cid);
+    }
   }, []);
 
   const getAnswer = useCallback(async () => {
@@ -99,7 +101,7 @@ export default function ChatBox() {
       const { reply, cid } = await fetchChat(question, chatId);
       appendDialog({ role: "user", content: question });
       appendDialog({ role: "assistant", content: reply });
-      setChatId(cid);
+      cid && setChatId(cid);
       setQuestion("");
     });
   }, [appendDialog, question, chatId]);
