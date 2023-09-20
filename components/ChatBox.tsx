@@ -4,16 +4,17 @@ import { fetchChatHistory, type Dialog, fetchChat, Puzzle } from "../lib/api";
 import Chat from "./Chat";
 import { Button, Card, Loader, Menu, Text, TextInput } from "@mantine/core";
 import {
-  ArrowPathIcon,
-  Bars3Icon,
-  DocumentCheckIcon,
-  PaperAirplaneIcon,
-} from "@heroicons/react/24/outline";
-import {
   getHotkeyHandler,
   useEventListener,
   useInputState,
 } from "@mantine/hooks";
+import {
+  IconBan,
+  IconChecklist,
+  IconMenu2,
+  IconRotateRectangle,
+  IconSend,
+} from "@tabler/icons-react";
 
 export default function ChatBox() {
   const [pending, setPending] = useState(false);
@@ -137,10 +138,7 @@ export default function ChatBox() {
               size="md"
               rightSection={
                 !pending ? (
-                  <PaperAirplaneIcon
-                    ref={sendIconRef}
-                    className="w-4 cursor-pointer"
-                  />
+                  <IconSend ref={sendIconRef} className="w-4 cursor-pointer" />
                 ) : (
                   <Loader size={18} />
                 )
@@ -157,19 +155,19 @@ export default function ChatBox() {
             >
               <Menu.Target>
                 <Button>
-                  <Bars3Icon className="w-4" />
+                  <IconMenu2 className="w-4" />
                 </Button>
               </Menu.Target>
               <Menu.Dropdown>
                 <Menu.Item
                   onClick={getAnswer}
-                  leftSection={<DocumentCheckIcon className="w-4" />}
+                  leftSection={<IconChecklist className="w-4" />}
                 >
                   查看汤底
                 </Menu.Item>
                 <Menu.Item
                   onClick={stopGame}
-                  leftSection={<ArrowPathIcon className="w-4" />}
+                  leftSection={<IconBan className="w-4" />}
                 >
                   结束游戏
                 </Menu.Item>
@@ -180,7 +178,7 @@ export default function ChatBox() {
           <Button onClick={startNewGame} fullWidth disabled={pending}>
             {!pending ? (
               <>
-                <ArrowPathIcon className="w-4" />
+                <IconRotateRectangle className="w-4" />
                 &nbsp; 随机上汤
               </>
             ) : (
