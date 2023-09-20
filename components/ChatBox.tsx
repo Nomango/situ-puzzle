@@ -2,15 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { fetchChatHistory, type Dialog, fetchChat, Puzzle } from "../lib/api";
 import Chat from "./Chat";
-import {
-  Button,
-  Card,
-  Loader,
-  Menu,
-  Text,
-  TextInput,
-  useMantineTheme,
-} from "@mantine/core";
+import { Button, Card, Loader, Menu, Text, TextInput } from "@mantine/core";
 import {
   ArrowPathIcon,
   Bars3Icon,
@@ -65,7 +57,7 @@ export default function ChatBox() {
       appendDialog({ role: "assistant", content: reply });
       setChatId("");
     });
-  }, [appendDialog, chatId]);
+  }, [doAction, appendDialog, chatId]);
 
   const startNewGame = useCallback(async () => {
     await doAction(async () => {
@@ -73,7 +65,7 @@ export default function ChatBox() {
       const { cid } = await fetchChat("");
       await reloadDialogs(cid);
     });
-  }, [reloadDialogs]);
+  }, [doAction, reloadDialogs]);
 
   const stopGame = useCallback(async () => {
     setChatId("");
@@ -81,16 +73,16 @@ export default function ChatBox() {
 
   const [cookies, setCookie] = useCookies(["cid"]);
   useEffect(() => {
-    // cookies.cid = cookies.cid || "a5d81020-dbb9-43e1-8dfb-75bf1abc4969";
-    if (cookies.cid) {
+    if (!chatId && cookies.cid) {
       doAction(async () => {
         await reloadDialogs(cookies.cid);
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useEffect(() => {
     setCookie("cid", chatId, { maxAge: 3600 * 24 * 30 });
-  }, [chatId]);
+  }, [chatId, setCookie]);
 
   const [question, setQuestion] = useInputState("");
   const submitQuestion = useCallback(async () => {
@@ -104,7 +96,7 @@ export default function ChatBox() {
       cid && setChatId(cid);
       setQuestion("");
     });
-  }, [appendDialog, question, chatId]);
+  }, [appendDialog, question, chatId, doAction, setQuestion]);
 
   const sendIconRef = useEventListener("click", submitQuestion);
   return (
@@ -113,19 +105,19 @@ export default function ChatBox() {
         <Card className="h-20% overflow-auto" withBorder p="xl" radius="md">
           {puzzle ? (
             <>
-              <Text fz="xl" align="center">
+              <Text fz="xl" ta="center">
                 汤面 《{puzzle.title}》
               </Text>
-              <Text fz="md" color="gray">
+              <Text fz="md" c="gray">
                 {puzzle?.mystery}
               </Text>
             </>
           ) : (
             <>
-              <Text fz="xl" align="center">
+              <Text fz="xl" ta="center">
                 海龟汤 with AI
               </Text>
-              <Text fz="md" color="gray">
+              <Text fz="md" c="gray">
                 阅读一个难以理解的事件，试着提出任何问题，并找出事件背后真正的原因吧！
               </Text>
             </>
@@ -171,13 +163,13 @@ export default function ChatBox() {
               <Menu.Dropdown>
                 <Menu.Item
                   onClick={getAnswer}
-                  icon={<DocumentCheckIcon className="w-4" />}
+                  leftSection={<DocumentCheckIcon className="w-4" />}
                 >
                   查看汤底
                 </Menu.Item>
                 <Menu.Item
                   onClick={stopGame}
-                  icon={<ArrowPathIcon className="w-4" />}
+                  leftSection={<ArrowPathIcon className="w-4" />}
                 >
                   结束游戏
                 </Menu.Item>
@@ -185,21 +177,7 @@ export default function ChatBox() {
             </Menu>
           </div>
         ) : (
-          <Button
-            onClick={startNewGame}
-            fullWidth
-            sx={(theme) => ({
-              backgroundColor:
-                theme.colorScheme === "dark" ? "#5865F2" : "#5865F2",
-              "&:not([data-disabled]):hover": {
-                backgroundColor:
-                  theme.colorScheme === "dark"
-                    ? theme.fn.lighten("#5865F2", 0.05)
-                    : theme.fn.darken("#5865F2", 0.05),
-              },
-            })}
-            disabled={pending}
-          >
+          <Button onClick={startNewGame} fullWidth disabled={pending}>
             {!pending ? (
               <>
                 <ArrowPathIcon className="w-4" />

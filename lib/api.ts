@@ -1,4 +1,5 @@
 import qs from "qs";
+import { publicRuntimeConfig } from "./env";
 
 export interface Dialog {
   id?: string;
@@ -24,7 +25,7 @@ export async function fetchChat(question: string, cid?: string) {
   });
 }
 
-function fetchAPI<R = any>(url: string, query?: any): Promise<R> {
+async function fetchAPI<R = any>(url: string, query?: any) {
   const encodedQuery = query
     ? "?" +
       qs.stringify(query, {
@@ -33,7 +34,7 @@ function fetchAPI<R = any>(url: string, query?: any): Promise<R> {
         skipNulls: false,
       })
     : "";
-  return fetch(import.meta.env.PUBLIC_API_BASE_URL + url + encodedQuery).then(
+  return fetch(publicRuntimeConfig.apiBaseUrl + url + encodedQuery).then(
     (resp) => resp.json() as R
   );
 }

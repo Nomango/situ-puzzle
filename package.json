@@ -1,33 +1,35 @@
 {
   "name": "situ-puzzle",
-  "type": "module",
-  "version": "0.0.1",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
-    "@astrojs/react": "^2.3.2",
-    "@astrojs/vercel": "^3.8.2",
-    "@emotion/react": "^11.11.1",
     "@heroicons/react": "^2.0.18",
-    "@mantine/core": "^6.0.19",
-    "@mantine/hooks": "^6.0.19",
-    "@types/qs": "^6.9.7",
-    "@types/react": "^18.0.21",
-    "@types/react-dom": "^18.0.6",
-    "astro": "^2.10.13",
+    "@mantine/core": "^7.0.0",
+    "@mantine/hooks": "^7.0.0",
+    "@types/node": "20.6.2",
+    "@types/react": "18.2.22",
+    "@types/react-dom": "18.2.7",
+    "eslint": "8.49.0",
+    "eslint-config-next": "13.4.19",
+    "next": "13.4.19",
     "qs": "^6.11.2",
-    "react": "^18.0.0",
-    "react-cookie": "^6.1.0",
-    "react-dom": "^18.0.0"
+    "react": "18.2.0",
+    "react-cookie": "^6.1.1",
+    "react-dom": "18.2.0",
+    "typescript": "5.2.2"
   },
   "devDependencies": {
-    "@unocss/astro": "^0.55.2",
-    "@unocss/reset": "^0.55.2",
-    "unocss": "^0.55.2"
+    "@types/qs": "^6.9.8",
+    "@unocss/postcss": "^0.55.7",
+    "postcss": "^8.4.30",
+    "postcss-preset-mantine": "^1.7.0",
+    "postcss-simple-vars": "^7.0.1",
+    "unocss": "^0.55.7"
   }
 }
